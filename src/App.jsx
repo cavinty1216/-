@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navigation from "./components/Navigation.jsx";
+import Navigation from "./Navigation.jsx";
 import Home from "./pages/Home.jsx";
 import TodoPage from "./pages/TodoPage.jsx";
 import NotesPage from "./pages/NotesPage.jsx";
