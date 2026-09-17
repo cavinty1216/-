@@ -1,12 +1,11 @@
 import { useState } from "react";
-import Navigation from "./Navigation.jsx";
+import Navigation from "./components/Navigation.jsx";
 import Home from "./pages/Home.jsx";
 import TodoPage from "./pages/TodoPage.jsx";
 import NotesPage from "./pages/NotesPage.jsx";
 import StudyPage from "./pages/StudyPage.jsx";
 import ExercisePage from "./pages/ExercisePage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
-
 
 
 
