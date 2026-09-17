@@ -1,0 +1,801 @@
+/* ============================================================
+   JARVIS OS - 전역 스타일
+   CSS 변수(:root 안의 --색상이름)를 사용하면 색을 한 곳에서만
+   바꿔도 앱 전체에 적용됩니다. (디자인 토큰 방식)
+   ============================================================ */
+
+:root {
+  /* 배경 색상 */
+  --bg-app: #0a0a0d;
+  --bg-elevated: #131316;
+  --bg-card: #17171b;
+  --bg-card-hover: #1d1d22;
+  --bg-input: #1c1c21;
+
+  /* 테두리 */
+  --border-subtle: #232328;
+  --border-strong: #313138;
+
+  /* 텍스트 */
+  --text-primary: #f2f2f4;
+  --text-secondary: #9b9ba4;
+  --text-tertiary: #616168;
+
+  /* 포인트 색상 (Iron Man의 JARVIS를 연상시키는 시안 블루) */
+  --accent: #4ea8ff;
+  --accent-soft: rgba(78, 168, 255, 0.14);
+  --accent-strong: #7cc0ff;
+
+  /* 의미 있는 상태 색상 */
+  --success: #34d399;
+  --success-soft: rgba(52, 211, 153, 0.14);
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.14);
+
+  /* 간격(spacing) 기준값 - 8px 배수로 통일 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* 둥근 정도 */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+
+  /* 사이드바 너비 / 하단 네비 높이 */
+  --sidebar-width: 220px;
+  --bottom-nav-height: 72px;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-app);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+/* 스크롤바를 얇고 눈에 덜 띄게 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ============================================================
+   앱 레이아웃
+   ============================================================ */
+
+.app-shell {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  overflow-y: auto;
+  padding: var(--space-6) var(--space-6) var(--space-7);
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-header {
+  margin-bottom: var(--space-6);
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-1);
+}
+
+.page-subtitle {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin: 0;
+}
+
+/* ============================================================
+   사이드바 (PC / 태블릿)
+   ============================================================ */
+
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  height: 100%;
+  background: var(--bg-elevated);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-5) var(--space-3);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3) var(--space-6);
+}
+
+.sidebar-brand-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.sidebar-brand-text {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14.5px;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-item:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.nav-item.active {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: var(--space-3);
+  color: var(--text-tertiary);
+  font-size: 12px;
+}
+
+/* ============================================================
+   하단 네비게이션 (모바일)
+   ============================================================ */
+
+.bottom-nav {
+  display: none;
+}
+
+/* ============================================================
+   카드 공통 스타일
+   ============================================================ */
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-2);
+}
+
+/* ============================================================
+   홈 화면
+   ============================================================ */
+
+.home-greeting-card {
+  background: linear-gradient(155deg, #15161c 0%, #101014 100%);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-5);
+}
+
+.home-time {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  margin: var(--space-1) 0;
+}
+
+.home-date {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.home-greeting {
+  color: var(--accent-strong);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.stat-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.stat-label {
+  color: var(--text-tertiary);
+  font-size: 13px;
+}
+
+.shortcut-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.shortcut-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.shortcut-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.shortcut-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.shortcut-label {
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.shortcut-desc {
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+}
+
+/* ============================================================
+   폼 요소 (입력창, 버튼)
+   ============================================================ */
+
+.input-row {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.text-input,
+.textarea-input {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: var(--space-3) var(--space-4);
+  font-size: 14.5px;
+  outline: none;
+  transition: border-color 0.15s ease;
+  min-width: 0;
+}
+
+.text-input:focus,
+.textarea-input:focus {
+  border-color: var(--accent);
+}
+
+.textarea-input {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.5;
+  font-family: inherit;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #04101f;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+
+.btn-secondary {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+}
+
+.btn-danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.btn-danger:hover {
+  filter: brightness(1.15);
+}
+
+.btn-icon {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: transparent;
+  color: var(--text-tertiary);
+  border-radius: 10px;
+}
+
+.btn-icon:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   리스트 (할 일 / 메모 / 운동 공통으로 사용)
+   ============================================================ */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.list-item.done {
+  opacity: 0.5;
+}
+
+.checkbox {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  border: 1.5px solid var(--border-strong);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: transparent;
+  transition: all 0.15s ease;
+}
+
+.checkbox.checked {
+  background: var(--success);
+  border-color: var(--success);
+  color: #04211a;
+}
+
+.list-item-text {
+  flex: 1;
+  font-size: 14.5px;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.list-item-text.done {
+  text-decoration: line-through;
+  color: var(--text-tertiary);
+}
+
+.list-item-meta {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-tertiary);
+  padding: var(--space-7) var(--space-4);
+  font-size: 14px;
+}
+
+/* ============================================================
+   메모 카드
+   ============================================================ */
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.note-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-height: 140px;
+}
+
+.note-card-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.note-card-content {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  word-break: break-word;
+  flex: 1;
+  line-height: 1.5;
+}
+
+.note-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-2);
+}
+
+.note-card-date {
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+}
+
+.note-actions {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  z-index: 50;
+}
+
+.modal-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+/* ============================================================
+   공부 타이머
+   ============================================================ */
+
+.timer-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-7) var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.timer-display {
+  font-size: 56px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  margin: var(--space-3) 0 var(--space-5);
+}
+
+.timer-status {
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background: var(--bg-card-hover);
+}
+
+.timer-status.running {
+  color: var(--success);
+  background: var(--success-soft);
+}
+
+.timer-controls {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.timer-controls .btn {
+  min-width: 110px;
+}
+
+/* ============================================================
+   운동 기록
+   ============================================================ */
+
+.exercise-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+/* ============================================================
+   설정
+   ============================================================ */
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.settings-row:last-child {
+  border-bottom: none;
+}
+
+.settings-label {
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.settings-desc {
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.settings-section {
+  margin-bottom: var(--space-5);
+}
+
+/* ============================================================
+   반응형 - 태블릿
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 84px;
+  }
+  .sidebar-brand-text,
+  .nav-item span {
+    display: none;
+  }
+  .nav-item {
+    justify-content: center;
+  }
+  .sidebar-brand {
+    justify-content: center;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+/* ============================================================
+   반응형 - 모바일 (하단 네비게이션으로 전환)
+   ============================================================ */
+
+@media (max-width: 680px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .app-main {
+    padding: var(--space-4) var(--space-4)
+      calc(var(--bottom-nav-height) + var(--space-5));
+  }
+
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--bottom-nav-height);
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-subtle);
+    padding: var(--space-2) var(--space-2)
+      calc(var(--space-2) + env(safe-area-inset-bottom));
+    justify-content: space-around;
+    align-items: center;
+    z-index: 40;
+  }
+
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    font-size: 10.5px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: var(--space-1) var(--space-2);
+    border-radius: 10px;
+  }
+
+  .bottom-nav-item.active {
+    color: var(--accent-strong);
+  }
+
+  .home-time {
+    font-size: 34px;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+  }
+
+  .stat-card {
+    padding: var(--space-3);
+  }
+
+  .stat-value {
+    font-size: 18px;
+  }
+
+  .shortcut-grid,
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exercise-form {
+    grid-template-columns: 1fr;
+  }
+
+  .timer-display {
+    font-size: 42px;
+  }
+
+  .timer-controls .btn {
+    min-width: 88px;
+    padding: var(--space-3);
+  }
+}
