@@ -1,19 +1,12 @@
 import { useState } from "react";
-import Navigation from "./components/Navigation.jsx";
-import Home from "./pages/Home.jsx";
-import TodoPage from "./pages/TodoPage.jsx";
-import NotesPage from "./pages/NotesPage.jsx";
-import StudyPage from "./pages/StudyPage.jsx";
-import ExercisePage from "./pages/ExercisePage.jsx";
-import SettingsPage from "./pages/SettingsPage.jsx";
+import Navigation from "./Navigation.jsx";
+import Home from "./Home.jsx";
+import TodoPage from "./TodoPage.jsx";
+import NotesPage from "./NotesPage.jsx";
+import StudyPage from "./StudyPage.jsx";
+import ExercisePage from "./ExercisePage.jsx";
+import SettingsPage from "./SettingsPage.jsx";
 
-
-
-
-
-
-// 라우팅 라이브러리 없이, activePage라는 하나의 state로
-// 어떤 페이지를 보여줄지 결정합니다. (초보자가 이해하기 쉬운 방식)
 export default function App() {
   const [activePage, setActivePage] = useState("home");
 
