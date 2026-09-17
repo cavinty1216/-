@@ -7,6 +7,12 @@ import StudyPage from "./pages/StudyPage.jsx";
 import ExercisePage from "./pages/ExercisePage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 
+
+
+
+
+
+
 // 라우팅 라이브러리 없이, activePage라는 하나의 state로
 // 어떤 페이지를 보여줄지 결정합니다. (초보자가 이해하기 쉬운 방식)
 export default function App() {
